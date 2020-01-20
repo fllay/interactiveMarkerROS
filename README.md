@@ -107,6 +107,34 @@ the coresponding names in the python code are
     int_marker.name = "simple_marker"
 ```
 
+what interactive_marker_proxy  does is in the following
+
+
+```interactive_marker_proxy
+Republishes interactive markers for use with ros3djs (throttled to conserve bandwidth) and provides the get_init service.
+Subscribed Topics
+
+~topic_ns (visualization_msgs/InteractiveMarker)
+the same topic an Interactive Marker Client would subscribe to
+Published Topics
+
+~topic_ns/tunneled/update (visualization_msgs/InteractiveMarker)
+a republished version of ~topic_ns, published at a frequency of ~update_rate Hz
+Services
+
+~topic_ns/tunneled/get_init (interactive_marker_proxy/GetInit)
+returns the current poses for all interactive markers in ~topic_ns in an InteractiveMarkerInit message
+Parameters
+
+~target_frame (string)
+target tf frame - this is the frame that will be used by ros3djs as the fixed frame
+~topic_ns (string)
+name of the InteractiveMarker topic that is to be republished
+~update_rate (float, default: 30.0)
+the rate (in Hz) at which ~target_frame/tunneled/update will be published
+```
+
+
 3. In javascript, we need the following code to show the interactive marker in the scence.
 
 ```javascript
