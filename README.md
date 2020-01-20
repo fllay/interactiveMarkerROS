@@ -95,7 +95,7 @@ if __name__=="__main__":
 
 ```
 
-2. The frame id and the marker name will be use in 
+2. The frame id and the marker name will be use in ROS proxy node from interactive_marker_proxy package.
 
 ```rosrun interactive_marker_proxy proxy topic_ns:=/simple_marker target_frame:=/map```
 
@@ -105,4 +105,31 @@ the coresponding names in the python code are
 ```
     int_marker.header.frame_id = "map"
     int_marker.name = "simple_marker"
+```
+
+3. In javascript, we need the following code to show the interactive marker in the scence.
+
+```javascript
+
+            var tfClientM = new ROSLIB.TFClient({
+                ros: ros,
+                angularThres: 0.01,
+                transThres: 0.01,
+                rate: 10.0,
+                fixedFrame: '/map'
+            });
+
+
+
+
+
+            var imClient = new ROS3D.InteractiveMarkerClient({
+                ros: ros,
+                tfClient: tfClientM,
+                topic: '/simple_marker',
+                camera: viewer3d.camera,
+                rootObject: viewer3d.selectableObjects
+            });
+
+
 ```
