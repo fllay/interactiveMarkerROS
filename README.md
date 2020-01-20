@@ -1,4 +1,6 @@
-Test
+Using interactive markers with ros3djs
+
+1. Create an one-dof interactive marker node ```one-dof-marker.py```
 
 ```python
 #!/usr/bin/env python
@@ -91,4 +93,16 @@ if __name__=="__main__":
 
     rospy.spin()
 
+```
+
+2. The frame id and the marker name will be use in 
+
+```rosrun interactive_marker_proxy proxy topic_ns:=/simple_marker target_frame:=/map```
+
+
+the coresponding names in the python code are
+
+```
+    int_marker.header.frame_id = "map"
+    int_marker.name = "simple_marker"
 ```
